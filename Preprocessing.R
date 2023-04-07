@@ -20,10 +20,10 @@ stock = select(price, all_of(stock_cols)) %>%
          "close" = "Close",
          "volume" = "Volume")
 
-# populate 1 - 30 trading days price change in future
+# populate 1 - 45 trading days price change in future
 for (i in 1:45) {
-  stock <- stock %>%
-    mutate(!!paste0("change_", i, "day") := (lead(close, n = i)/open - 1) * 100)
+    stock <- stock %>%
+    mutate(!!paste0("change_", i, "day") := (lead(close, n = i)/close - 1) * 100)
 }
 
 # **Note** 2023-2-9 to 2023-3-24 is the range of days that miss future price changes
