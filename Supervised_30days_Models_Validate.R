@@ -37,8 +37,6 @@ test <- df[-train_index, ]
 # use grep() to find column names that start with change_
 cols_change <- grep("^change_", names(df), value = TRUE)
 
-cols_change[13:17]
-
 # Initialize an empty list to store the models
 multi_models <- list()
 

@@ -84,20 +84,35 @@ for (i in 1:nrow(merged_df)) {
   
 }
 
+#---------------------------Project all predictions-----------------------------
 
 # reset row number
 rownames(merged_df) <- seq(nrow(merged_df))
+merged_df = select(merged_df, all_of( c('date', 'close',"pred_price") )) %>%
+  rename("close_ensemble" = "pred_price")
 
 # change date's data type
 merged_df$date <- as.Date(merged_df$date)
 
-# plot the "close" price and "pred_price" columns:
+# import Time series models' prediction
+pred_time_series = read.csv("time_series_prediction.csv")
+pred_time_series$date <- as.Date(pred_time_series$date)
+
+# Inner join the tabels
+merged_df <- inner_join(merged_df, pred_time_series, by = "date")
+
+# Plot close, close_prophet, close_arima, and close_ensemble
 ggplot(merged_df, aes(x = date)) + 
   geom_line(aes(y = close, color = "Close")) +
-  geom_line(aes(y = pred_price, color = "Pred Price")) +
+  geom_line(aes(y = close_prophet, color = "Close Prophet")) +
+  geom_line(aes(y = close_arima, color = "Close ARIMA")) +
+  geom_line(aes(y = close_ensemble, color = "Close Ensemble")) +
   labs(title = "Close Price vs. Predicted Price",
        y = "Price",
        color = "Legend") +
   scale_color_manual(name = "",
-                     values = c("Close" = "blue", "Pred Price" = "red"))
+                     values = c("Close" = "blue", 
+                                "Close Prophet" = "green",
+                                "Close ARIMA" = "orange",
+                                "Close Ensemble" = "red"))
 
