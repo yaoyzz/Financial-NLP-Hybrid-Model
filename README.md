@@ -26,17 +26,35 @@ Sources:
 
 ### 03 Natural Language Processing 
 Techniques include 
-• Term frequency
-• Word-level vectorization 
-• Character-level vectorization  
-• Sentiment classification  
+• TFIDF - Get TF for each word for each article. Get IDF for each word for each article. Get the sum of TF x IDF for each article.
+• Word-level Embeddings - Created a vocabulary of words. Trained word embeddings using GloVe (unsupervised learning algorithm). Calculated mean word embeddings for each article. Calculated the max, sum, and mean of the embeddings (vectors)
+• Character-level Embeddings - Converted text data to sequences. Padded sequences to a fixed length. Created an embedding layer that maps the integer-encoded characters to dense vectors. 
+• Sentiment Inference - Calculated sentiment scores using different lexicons. Calculated AFINN, Bing, and NRC sentiment scores per article. Replaced NA values with 0 in the sentiment scores data frame.
 
 ### 04 Regression Models
 • Train, tune and validate the supervised learning model using text features as predictors and price movement as
 dependent variable 
+• Train the Linear Regression and CatBoost model 
+• Use dependent variables including future change in one day to 30 days   
 
 ### 05 Time Series Model 
 • Train, tune and validate the models on the dates and the responsive price movement
+• Auto Arima
+• Prophet
+• Average 
+• Exponential smoothing
+• Holt Model
+• Random Walk (Drift Model)
 
 ### 06 Projection and Inference
 • Plot and compare the predictions created by different models and render the outcomes   
+
+### Use Cases
+• Use Time Series models to predict mid-term and long-term trends and generate profits.
+• Use NLP supervised models for short-term directional prediction  in volatile market to generate profits
+
+### Future Development
+• Add more technical indicators as features such as moving average, MACD, RSI and KDJ to boost the supervised learning model.
+• Automate the ETL process and deploy the models on stocks or other securities in various sectors to compare the performance under different market conditions.
+
+
